@@ -1,0 +1,23 @@
+{
+  "overview": "Global Trek — world-class Himalayan adventure travel and trekking platform with 15 trek routes, yatra pilgrimage packages, and a full booking system.",
+  "features": [
+    "Foxico-style desktop homepage with 5 floating trek/yatra cards and dot navigation",
+    "Airbnb-style mobile homepage with search, filter pills, and bottom nav",
+    "Reels/Shorts strip on homepage",
+    "Floating parallax hero on trek and yatra detail pages",
+    "Illustrated SVG trail maps with interactive waypoints",
+    "Review, gallery, and gear sections on all detail pages",
+    "IndiHikes-style booking flow with add-on boxes and Razorpay payment"
+  ],
+  "category": "travel-website",
+  "tags": [
+    "trekking",
+    "adventure",
+    "himalayas",
+    "travel",
+    "booking",
+    "india",
+    "yatra"
+  ],
+  "last_updated": "2026-06-01T11:06:22.773Z"
+}

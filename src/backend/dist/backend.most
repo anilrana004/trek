@@ -1,0 +1,318 @@
+// Version: 1.0.0
+type BatchStatus__549582128 = {#cancelled; #filling; #full; #open};
+type BookingAddOns__146808068 =
+  {
+    cityPickup : Bool;
+    gearRental : Bool;
+    insurance : Bool;
+    photography : Bool;
+    singleRoom : Bool
+  };
+type BookingInquiry__109308772 =
+  {
+    email : Text;
+    id : Nat;
+    message : Text;
+    name : Text;
+    submittedAt : Int;
+    tripId : Text
+  };
+type BookingRequest__985930837 =
+  {
+    bookingId : Nat;
+    bookingRef : Text;
+    createdAt : Int;
+    email : Text;
+    name : Text;
+    nationality : Text;
+    participants : Nat;
+    phone : Text;
+    selectedDate : Text;
+    status : Text;
+    tripId : Text;
+    tripName : Text;
+    userId : Principal
+  };
+type BookingStatus__334596612 = {#cancelled; #confirmed; #pending};
+type Booking__165515023 =
+  {
+    addOns : BookingAddOns__146808068;
+    batchId : Nat;
+    bookingRef : Text;
+    couponCode : ?Text;
+    createdAt : Int;
+    gstAmount : Nat;
+    id : Nat;
+    participants : [Participant__559733589];
+    paymentStatus : PaymentStatus__1008279183;
+    status : BookingStatus__334596612;
+    stripePaymentIntentId : ?Text;
+    totalAmount : Nat;
+    trekSlug : Text;
+    userId : Principal
+  };
+type CallbackRequest__98057700 =
+  {
+    createdAt : Int;
+    id : Nat;
+    name : Text;
+    phone : Text;
+    preferredDate : ?Text;
+    trekInterest : ?Text
+  };
+type ContactSubmission__185949536 =
+  {
+    country : ?Text;
+    email : Text;
+    id : Nat;
+    message : Text;
+    name : Text;
+    numberOfPeople : ?Text;
+    phone : ?Text;
+    preferredDates : ?Text;
+    submittedAt : Int;
+    tripInterest : ?Text
+  };
+type Difficulty__221989539 = {#Difficult; #Easy; #EasyModerate; #Moderate};
+type FAQ__685634782 = {answer : Text; question : Text};
+type GHTInterestForm__513665473 =
+  {
+    email : Text;
+    ghtSection : Text;
+    id : Nat;
+    message : ?Text;
+    name : Text;
+    phone : ?Text;
+    submittedAt : Int
+  };
+type GearRentalItem__372947035 =
+  {
+    available : Bool;
+    depositAmount : Nat;
+    description : Text;
+    id : Nat;
+    name : Text;
+    pricePerDay : Nat
+  };
+type Inquiry__228696255 =
+  {
+    createdAt : Int;
+    email : Text;
+    id : Nat;
+    message : Text;
+    name : Text;
+    phone : Text;
+    trekSlug : Text
+  };
+type ItineraryDay__419411520 =
+  {
+    accommodation : ?Text;
+    altitude : ?Text;
+    dayNumber : Nat;
+    description : Text;
+    distanceKm : ?Float;
+    durationHrs : ?Float;
+    meals : ?Text;
+    title : Text;
+    waypoints : [Text]
+  };
+type Nat__1040412405 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewsletterSubscription__636257563 =
+  {email : Text; id : Nat; subscribedAt : Int};
+type Participant__559733589 =
+  {
+    age : Nat;
+    emergencyContact : Text;
+    fitnessDeclaration : Bool;
+    gender : Text;
+    medicalConditions : ?Text;
+    name : Text
+  };
+type PaymentStatus__1008279183 = {#failed; #paid; #pending; #refunded};
+type TailorMadeRequest__318878582 =
+  {
+    activityType : Text;
+    budgetRange : Text;
+    country : ?Text;
+    destination : ?Text;
+    email : Text;
+    id : Nat;
+    name : Text;
+    numberOfPeople : Text;
+    phone : ?Text;
+    preferredDates : ?Text;
+    preferredDuration : ?Text;
+    specialRequirements : ?Text;
+    submittedAt : Int
+  };
+type TrekBatch__291466909 =
+  {
+    bookedSeats : Nat;
+    endDate : Text;
+    id : Nat;
+    pricePerPerson : Nat;
+    startDate : Text;
+    status : BatchStatus__549582128;
+    totalSeats : Nat;
+    trekSlug : Text
+  };
+type TrekCategory__388871652 = {#trek; #yatra};
+type Trek__744479174 =
+  {
+    bestSeason : Text;
+    category : TrekCategory__388871652;
+    country : Text;
+    description : Text;
+    difficulty : Difficulty__221989539;
+    district : ?Text;
+    durationDays : Nat;
+    endPoint : ?Text;
+    exclusions : [Text];
+    faqs : [FAQ__685634782];
+    highlights : [Text];
+    id : Text;
+    imageUrl : ?Text;
+    inclusions : [Text];
+    isEditorsPick : Bool;
+    isMostBooked : Bool;
+    isTrending : Bool;
+    itinerary : [ItineraryDay__419411520];
+    maxAltitudeM : Nat;
+    name : Text;
+    packingList : [Text];
+    priceFrom : Nat;
+    priceTo : ?Nat;
+    region : Text;
+    slug : Text;
+    startPoint : ?Text;
+    state : Text;
+    trekDistanceKm : ?Float;
+    youtubeVideoIds : [Text]
+  };
+type Trip__1026323873 =
+  {
+    country : Text;
+    departureDate : ?Text;
+    difficulty : Text;
+    difficultyGrade : Nat;
+    duration : Nat;
+    id : Text;
+    imageUrl : ?Text;
+    isOnRequest : Bool;
+    isPremium : Bool;
+    maxAltitude : Nat;
+    maxGroup : Nat;
+    name : Text;
+    priceINR : ?Nat;
+    priceUSD : ?Nat;
+    region : Text;
+    returnDate : ?Text;
+    season : [Text];
+    slug : Text;
+    subRegion : ?Text;
+    tripType : Text
+  };
+type WishlistItem__855155770 =
+  {addedAt : Int; trekSlug : Text; userId : Principal};
+actor {
+  stable var bookingInquiries :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?BookingInquiry__109308772]];
+      var elementIndex : Nat__1040412405
+    };
+  stable var bookingRequests :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?BookingRequest__985930837]];
+      var elementIndex : Nat__1040412405
+    };
+  stable callbackReqs :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?CallbackRequest__98057700]];
+      var elementIndex : Nat__1040412405
+    };
+  stable var contacts :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?ContactSubmission__185949536]];
+      var elementIndex : Nat__1040412405
+    };
+  stable gearCatalogue :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?GearRentalItem__372947035]];
+      var elementIndex : Nat__1040412405
+    };
+  stable var ghtInterests :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?GHTInterestForm__513665473]];
+      var elementIndex : Nat__1040412405
+    };
+  stable gtTreks :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Trek__744479174]];
+      var elementIndex : Nat__1040412405
+    };
+  stable inquiries :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Inquiry__228696255]];
+      var elementIndex : Nat__1040412405
+    };
+  stable var newsletters :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?NewsletterSubscription__636257563]];
+      var elementIndex : Nat__1040412405
+    };
+  stable submissionState :
+    {
+      var nextBookingInquiryId : Nat;
+      var nextBookingRequestId : Nat;
+      var nextContactId : Nat;
+      var nextGHTInterestId : Nat;
+      var nextNewsletterId : Nat;
+      var nextTailorMadeId : Nat
+    };
+  stable var tailorMadeReqs :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?TailorMadeRequest__318878582]];
+      var elementIndex : Nat__1040412405
+    };
+  stable trekBatches :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?TrekBatch__291466909]];
+      var elementIndex : Nat__1040412405
+    };
+  stable trekBookings :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Booking__165515023]];
+      var elementIndex : Nat__1040412405
+    };
+  stable trekState :
+    {
+      var nextBookingId : Nat;
+      var nextCallbackId : Nat;
+      var nextInquiryId : Nat
+    };
+  stable trips :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Trip__1026323873]];
+      var elementIndex : Nat__1040412405
+    };
+  stable wishlist :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?WishlistItem__855155770]];
+      var elementIndex : Nat__1040412405
+    }
+};

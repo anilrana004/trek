@@ -1,0 +1,237 @@
+type WishlistItem = 
+ record {
+   addedAt: int;
+   trekSlug: text;
+   userId: principal;
+ };
+type Trip = 
+ record {
+   country: text;
+   departureDate: opt text;
+   difficulty: text;
+   difficultyGrade: nat;
+   duration: nat;
+   id: text;
+   imageUrl: opt text;
+   isOnRequest: bool;
+   isPremium: bool;
+   maxAltitude: nat;
+   maxGroup: nat;
+   name: text;
+   priceINR: opt nat;
+   priceUSD: opt nat;
+   region: text;
+   returnDate: opt text;
+   season: vec text;
+   slug: text;
+   subRegion: opt text;
+   tripType: text;
+ };
+type TrekCategory = 
+ variant {
+   trek;
+   yatra;
+ };
+type TrekBatch = 
+ record {
+   bookedSeats: nat;
+   endDate: text;
+   id: nat;
+   pricePerPerson: nat;
+   startDate: text;
+   status: BatchStatus;
+   totalSeats: nat;
+   trekSlug: text;
+ };
+type Trek = 
+ record {
+   bestSeason: text;
+   category: TrekCategory;
+   country: text;
+   description: text;
+   difficulty: Difficulty;
+   district: opt text;
+   durationDays: nat;
+   endPoint: opt text;
+   exclusions: vec text;
+   faqs: vec FAQ;
+   highlights: vec text;
+   id: text;
+   imageUrl: opt text;
+   inclusions: vec text;
+   isEditorsPick: bool;
+   isMostBooked: bool;
+   isTrending: bool;
+   itinerary: vec ItineraryDay;
+   maxAltitudeM: nat;
+   name: text;
+   packingList: vec text;
+   priceFrom: nat;
+   priceTo: opt nat;
+   region: text;
+   slug: text;
+   startPoint: opt text;
+   state: text;
+   trekDistanceKm: opt float64;
+   youtubeVideoIds: vec text;
+ };
+type PaymentStatus = 
+ variant {
+   failed;
+   paid;
+   pending;
+   refunded;
+ };
+type Participant = 
+ record {
+   age: nat;
+   emergencyContact: text;
+   fitnessDeclaration: bool;
+   gender: text;
+   medicalConditions: opt text;
+   name: text;
+ };
+type ItineraryDay = 
+ record {
+   accommodation: opt text;
+   altitude: opt text;
+   dayNumber: nat;
+   description: text;
+   distanceKm: opt float64;
+   durationHrs: opt float64;
+   meals: opt text;
+   title: text;
+   waypoints: vec text;
+ };
+type GearRentalItem = 
+ record {
+   available: bool;
+   depositAmount: nat;
+   description: text;
+   id: nat;
+   name: text;
+   pricePerDay: nat;
+ };
+type FAQ = 
+ record {
+   answer: text;
+   question: text;
+ };
+type Difficulty = 
+ variant {
+   Difficult;
+   Easy;
+   EasyModerate;
+   Moderate;
+ };
+type BookingStatus = 
+ variant {
+   cancelled;
+   confirmed;
+   pending;
+ };
+type BookingRequestInput = 
+ record {
+   email: text;
+   name: text;
+   nationality: text;
+   participants: nat;
+   phone: text;
+   selectedDate: text;
+   tripId: text;
+   tripName: text;
+ };
+type BookingRequest = 
+ record {
+   bookingId: nat;
+   bookingRef: text;
+   createdAt: int;
+   email: text;
+   name: text;
+   nationality: text;
+   participants: nat;
+   phone: text;
+   selectedDate: text;
+   status: text;
+   tripId: text;
+   tripName: text;
+   userId: principal;
+ };
+type BookingAddOns = 
+ record {
+   cityPickup: bool;
+   gearRental: bool;
+   insurance: bool;
+   photography: bool;
+   singleRoom: bool;
+ };
+type Booking = 
+ record {
+   addOns: BookingAddOns;
+   batchId: nat;
+   bookingRef: text;
+   couponCode: opt text;
+   createdAt: int;
+   gstAmount: nat;
+   id: nat;
+   participants: vec Participant;
+   paymentStatus: PaymentStatus;
+   status: BookingStatus;
+   stripePaymentIntentId: opt text;
+   totalAmount: nat;
+   trekSlug: text;
+   userId: principal;
+ };
+type BatchStatus = 
+ variant {
+   cancelled;
+   filling;
+   full;
+   open;
+ };
+service : {
+  addToWishlist: (trekSlug: text) -> ();
+  cancelBooking: (bookingId: nat) -> (bool);
+  createBooking: (trekSlug: text, batchId: nat, participants:
+   vec Participant, addOns: BookingAddOns, totalAmount: nat, gstAmount: 
+   nat, couponCode: opt text) -> (Booking);
+  getBooking: (bookingId: nat) -> (opt Booking) query;
+  getBookingById: (id: nat) -> (opt BookingRequest) query;
+  getGearRentalItems: () -> (vec GearRentalItem) query;
+  getMyBookingRequests: () -> (vec BookingRequest) query;
+  getMyTrekBookings: () -> (vec Booking) query;
+  getMyWishlist: () -> (vec WishlistItem) query;
+  getTrekBatches: (trekSlug: text) -> (vec TrekBatch) query;
+  getTrekBySlug: (slug: text) -> (opt Trek) query;
+  getTreks: () -> (vec Trek) query;
+  getTreksByDifficulty: (difficulty: Difficulty) -> (vec Trek) query;
+  getTreksByState: (state: text) -> (vec Trek) query;
+  getTripBySlug: (slug: text) -> (opt Trip) query;
+  getTrips: () -> (vec Trip) query;
+  getTripsByDifficulty: (difficulty: text) -> (vec Trip) query;
+  getTripsByDuration: (durationRange: text) -> (vec Trip) query;
+  getTripsByRegion: (region: text) -> (vec Trip) query;
+  getTripsBySeason: (season: text) -> (vec Trip) query;
+  getUpcomingBatchesForTrek: (trekSlug: text) -> (vec TrekBatch) query;
+  removeFromWishlist: (trekSlug: text) -> ();
+  searchTreks: (keyword: text) -> (vec Trek) query;
+  submitBookingInquiry: (tripId: text, name: text, email: text, message:
+   text) -> (nat);
+  submitBookingRequest: (input: BookingRequestInput) -> (BookingRequest);
+  submitCallbackRequest: (name: text, phone: text, trekInterest: opt text,
+   preferredDate: opt text) -> (nat);
+  submitContact: (name: text, email: text, phone: opt text, country:
+   opt text, tripInterest: opt text, numberOfPeople: opt text,
+   preferredDates: opt text, message: text) -> (nat);
+  submitGHTInterest: (name: text, email: text, phone: opt text, ghtSection:
+   text, message: opt text) -> (nat);
+  submitInquiry: (trekSlug: text, name: text, email: text, phone: text,
+   message: text) -> (nat);
+  submitTailorMade: (name: text, email: text, phone: opt text, country:
+   opt text, destination: opt text, numberOfPeople: text, preferredDuration:
+   opt text, budgetRange: text, preferredDates: opt text, activityType: 
+   text, specialRequirements: opt text) -> (nat);
+  subscribeNewsletter: (email: text) -> (nat);
+  updateBookingPaymentStatus: (bookingId: nat, paymentStatus: PaymentStatus,
+   stripePaymentIntentId: opt text) -> (bool);
+}

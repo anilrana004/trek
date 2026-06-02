@@ -1,0 +1,413 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&family=Montserrat:wght@600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Playfair Display";
+  src: local("Playfair Display");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "DM Sans";
+  src: local("DM Sans");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: "Playfair Display", Georgia, serif;
+    --font-body: "DM Sans", system-ui, sans-serif;
+    --font-mono: "Montserrat", system-ui, sans-serif;
+    --radius: 12px;
+
+    --background: 0.99 0.002 0;
+    --foreground: 0.15 0.01 155;
+    --card: 1.0 0.0 0;
+    --card-foreground: 0.15 0.01 155;
+    --popover: 1.0 0.0 0;
+    --popover-foreground: 0.15 0.01 155;
+
+    --primary: 0.45 0.18 155;
+    --primary-foreground: 0.98 0.005 155;
+
+    --secondary: 0.95 0.005 155;
+    --secondary-foreground: 0.25 0.01 155;
+    --muted: 0.94 0.008 155;
+    --muted-foreground: 0.5 0.01 155;
+
+    --accent: 0.58 0.22 70;
+    --accent-foreground: 0.98 0.005 70;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.98 0.005 25;
+
+    --border: 0.9 0.005 155;
+    --input: 0.9 0.005 155;
+    --ring: 0.45 0.18 155;
+
+    --chart-1: 0.55 0.2 155;
+    --chart-2: 0.58 0.22 70;
+    --chart-3: 0.6 0.16 25;
+    --chart-4: 0.5 0.15 240;
+    --chart-5: 0.52 0.18 150;
+
+    --sidebar: 0.98 0.0 0;
+    --sidebar-foreground: 0.15 0.01 155;
+    --sidebar-primary: 0.45 0.18 155;
+    --sidebar-primary-foreground: 0.98 0.005 155;
+    --sidebar-accent: 0.95 0.008 155;
+    --sidebar-accent-foreground: 0.25 0.01 155;
+    --sidebar-border: 0.9 0.005 155;
+    --sidebar-ring: 0.45 0.18 155;
+
+    --bg-void: #080a0c;
+    --bg-primary: #ffffff;
+    --bg-surface: #f8faf9;
+    --bg-elevated: #1c2330;
+    --bg-overlay: rgba(8, 10, 12, 0.72);
+    --border-subtle: #e8f5ee;
+    --border-default: #d1e8db;
+    --border-strong: #4a5568;
+    --text-primary: #1a1a1a;
+    --text-secondary: #4a4a4a;
+    --text-muted: #6b7280;
+    --text-inverse: #ffffff;
+    --accent-blue: #5bc4f0;
+    --accent-blue-hover: #7dd5f5;
+    --accent-blue-dim: rgba(91, 196, 240, 0.15);
+    --accent-blue-glow: rgba(91, 196, 240, 0.35);
+    --accent-gold: #d4a843;
+    --accent-gold-hover: #e8bf6a;
+    --accent-gold-dim: rgba(212, 168, 67, 0.12);
+    --diff-1: #4ade80;
+    --diff-2: #86efac;
+    --diff-3: #fcd34d;
+    --diff-4: #fb923c;
+    --diff-5: #f87171;
+    --diff-6: #ef4444;
+    --diff-7: #dc2626;
+    --diff-8: #991b1b;
+    --success: #22c55e;
+    --warning: #f59e0b;
+    --error: #ef4444;
+    --whatsapp-green: #25d366;
+    --gradient-hero: linear-gradient(
+      to bottom,
+      rgba(8, 10, 12, 0.15) 0%,
+      rgba(8, 10, 12, 0.25) 40%,
+      rgba(8, 10, 12, 0.85) 80%,
+      rgba(8, 10, 12, 1.0) 100%
+    );
+    --gradient-card: linear-gradient(
+      to bottom,
+      transparent 35%,
+      rgba(8, 10, 12, 0.92) 100%
+    );
+    --gradient-section: linear-gradient(
+      135deg,
+      rgba(91, 196, 240, 0.04) 0%,
+      transparent 60%
+    );
+    --text-xs: 0.75rem;
+    --text-sm: 0.875rem;
+    --text-base: 1rem;
+    --text-lg: 1.125rem;
+    --text-xl: 1.25rem;
+    --text-2xl: 1.5rem;
+    --text-3xl: 1.875rem;
+    --text-4xl: 2.25rem;
+    --text-5xl: 3rem;
+    --text-6xl: 3.75rem;
+    --text-7xl: 4.5rem;
+    --text-8xl: 6rem;
+    --leading-tight: 1.1;
+    --leading-snug: 1.25;
+    --leading-normal: 1.5;
+    --leading-relaxed: 1.75;
+    --tracking-wide: 0.05em;
+    --tracking-wider: 0.1em;
+    --tracking-caps: 0.15em;
+    --space-1: 0.25rem;
+    --space-2: 0.5rem;
+    --space-3: 0.75rem;
+    --space-4: 1rem;
+    --space-5: 1.25rem;
+    --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
+    --space-16: 4rem;
+    --space-20: 5rem;
+    --space-24: 6rem;
+    --space-32: 8rem;
+    --section-py-desktop: var(--space-20);
+    --section-py-mobile: var(--space-12);
+    --container-max: 1280px;
+    --container-narrow: 880px;
+    --container-wide: 1440px;
+    --radius-sm: 4px;
+    --radius-md: 8px;
+    --radius-lg: 20px;
+    --radius-xl: 20px;
+    --radius-full: 9999px;
+    --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4), 0 1px 4px rgba(0, 0, 0, 0.2);
+    --shadow-hover: 0 8px 40px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.3);
+    --shadow-glow-blue: 0 0 24px rgba(91, 196, 240, 0.35);
+    --shadow-glow-gold: 0 0 20px rgba(212, 168, 67, 0.3);
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 400ms ease;
+    --transition-spring: 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+    --nav-height: 70px;
+    --nav-bg-transparent: rgba(8, 10, 12, 0);
+    --nav-bg-scrolled: rgba(8, 10, 12, 0.95);
+    --nav-backdrop: blur(12px);
+    --card-width: 430px;
+    --card-height-image: 251px;
+    --card-border: 1px solid var(--border-subtle);
+    --card-radius: var(--radius-lg);
+    --btn-height-sm: 36px;
+    --btn-height-md: 44px;
+    --btn-height-lg: 52px;
+    --btn-radius: var(--radius-md);
+    --btn-font: var(--font-body);
+    --btn-weight: 600;
+    --btn-tracking: 0.05em;
+    --badge-radius: var(--radius-full);
+    --badge-padding: 2px 10px;
+    --badge-font-size: var(--text-xs);
+    --badge-font-weight: 700;
+    --badge-tracking: var(--tracking-caps);
+
+    --amber: #f4a623;
+    --card-shadow: 0 4px 20px rgba(26, 122, 76, 0.12);
+    --green-dark: #145c38;
+    --green-light: #2ecc71;
+    --green-muted: #e8f5ee;
+    --green-primary: #1a7a4c;
+    --red: #e74c3c;
+
+    --addon-box-border: 2px solid #e8f5ee;
+    --addon-box-selected-bg: rgba(244, 166, 35, 0.08);
+    --addon-box-selected-border: 2px solid #f4a623;
+    --float-card-blur: 8px;
+    --foxico-card-stagger: 40px;
+    --foxico-card-width: 340px;
+    --hero-card-float-shadow: 0 12px 48px rgba(26, 122, 76, 0.15), 0 4px 16px
+      rgba(26, 122, 76, 0.08);
+    --hero-dot-active: #1a7a4c;
+    --hero-transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    --map-accent: #1a7a4c;
+    --map-bg: #ffffff;
+    --map-trail-color: #f4a623;
+    --map-waypoint-size: 12px;
+    --mobile-bottom-nav-height: 64px;
+    --mobile-card-radius: 16px;
+    --mobile-pill-active-bg: #1a7a4c;
+    --mobile-pill-bg: #e8f5ee;
+    --parallax-depth: var(--space-20);
+    --parallax-scale: 1.05;
+    --reel-card-width: 160px;
+    --reel-play-overlay: rgba(26, 122, 76, 0.8);
+  }
+
+  .dark {
+    --background: 0.145 0 0;
+    --foreground: 0.95 0 0;
+    --card: 0.18 0 0;
+    --card-foreground: 0.95 0 0;
+    --popover: 0.22 0 0;
+    --popover-foreground: 0.95 0 0;
+
+    --primary: 0.8 0 0;
+    --primary-foreground: 0.145 0 0;
+
+    --secondary: 0.22 0 0;
+    --secondary-foreground: 0.85 0 0;
+    --muted: 0.22 0 0;
+    --muted-foreground: 0.55 0 0;
+
+    --accent: 0.8 0 0;
+    --accent-foreground: 0.145 0 0;
+
+    --destructive: 0.65 0.19 22;
+    --destructive-foreground: 0.145 0 0;
+
+    --border: 0.28 0 0;
+    --input: 0.28 0 0;
+    --ring: 0.8 0 0;
+
+    --chart-1: 0.49 0.24 264;
+    --chart-2: 0.7 0.17 162;
+    --chart-3: 0.77 0.19 70;
+    --chart-4: 0.63 0.27 304;
+    --chart-5: 0.65 0.25 16;
+
+    --sidebar: 0.18 0 0;
+    --sidebar-foreground: 0.95 0 0;
+    --sidebar-primary: 0.8 0 0;
+    --sidebar-primary-foreground: 0.145 0 0;
+    --sidebar-accent: 0.22 0 0;
+    --sidebar-accent-foreground: 0.85 0 0;
+    --sidebar-border: 0.28 0 0;
+    --sidebar-ring: 0.8 0 0;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply text-foreground font-body antialiased;
+    background-color: #ffffff;
+    color: var(--text-primary);
+  }
+}
+
+@layer utilities {
+  @keyframes float-in-left {
+    from {
+      opacity: 0;
+      transform: translateX(-40px) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) translateY(0);
+    }
+  }
+  @keyframes float-in-right {
+    from {
+      opacity: 0;
+      transform: translateX(40px) translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0) translateY(0);
+    }
+  }
+  @keyframes card-stagger {
+    0% {
+      opacity: 0;
+      transform: translateY(20px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  @keyframes parallax-float {
+    0%,
+    100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(8px);
+    }
+  }
+  @keyframes waypoint-pulse {
+    0% {
+      r: 6px;
+      opacity: 1;
+    }
+    50% {
+      r: 8px;
+      opacity: 0.7;
+    }
+    100% {
+      r: 6px;
+      opacity: 1;
+    }
+  }
+  @keyframes reel-shimmer {
+    0% {
+      background-position: 200% 0;
+    }
+    100% {
+      background-position: -200% 0;
+    }
+  }
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes kenBurns {
+    from {
+      transform: scale(1);
+    }
+    to {
+      transform: scale(1.06);
+    }
+  }
+  @keyframes waBounce {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    30% {
+      transform: translateY(-8px);
+    }
+    60% {
+      transform: translateY(-4px);
+    }
+  }
+  @keyframes checkPop {
+    0% {
+      transform: scale(0.5);
+    }
+    60% {
+      transform: scale(1.15);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+  .animate-fade-up {
+    animation: fadeUp 600ms ease forwards;
+  }
+  .animate-ken-burns {
+    animation: kenBurns 5000ms ease forwards;
+  }
+  .animate-wa-bounce {
+    animation: waBounce 1s ease 8s infinite;
+  }
+  .animate-float-in-left {
+    animation: float-in-left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .animate-float-in-right {
+    animation: float-in-right 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .animate-card-stagger {
+    animation: card-stagger 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .animate-parallax-float {
+    animation: parallax-float 4s ease-in-out infinite;
+  }
+  .animate-waypoint-pulse {
+    animation: waypoint-pulse 2s ease-in-out infinite;
+  }
+  .animate-reel-shimmer {
+    animation: reel-shimmer 2s infinite;
+  }
+  .animate-check-pop {
+    animation: checkPop 200ms var(--transition-spring);
+  }
+
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .reels-strip::-webkit-scrollbar {
+    display: none;
+  }
+}
